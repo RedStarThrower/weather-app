@@ -109,6 +109,7 @@ var dailyToHTML = function(jsonObj) {
 
 var doRequest = function(lat, lng) {
     var fullUrl = baseUrl + apiKey + "/" + lat + "," + lng + callbackHack
+    //console.log(fullUrl)
     return $.getJSON(fullUrl)
 }
 
@@ -137,15 +138,15 @@ var router = function() {
     var viewType = routeParts[0]
     var lat = routeParts[1]
     var lng = routeParts[2]
-    var promise = doRequest(lat, lng)
+    //console.log(routeParts)
     if (viewType === "currentView") {
-        promise.then(renderCurrentView)
+        doRequest(lat, lng).then(renderCurrentView)
     } else if (viewType === "hourlyView") {
         console.log('rending hourly view')
-        promise.then(renderHourlyView)
+        doRequest(lat, lng).then(renderHourlyView)
     } else if (viewType === "dailyView") {
         console.log('rending weekly view')
-        promise.then(renderDailyView)
+        doRequest(lat, lng).then(renderDailyView)
     }
 }
 
@@ -154,12 +155,16 @@ window.addEventListener("hashchange", router)
 //tempCbutton.addEventListener("hover", )
 
 currentViewButton.addEventListener("click", function() {
-    navigator.geolocation.getCurrentPosition(latLongCurrent), window.location.hash.substr(1) === "currentView", router()
+    navigator.geolocation.getCurrentPosition(latLongCurrent)
 })
 
-hourlyViewButton.addEventListener("click", function() { navigator.geolocation.getCurrentPosition(latLongHourly), window.location.hash.substr(1) === "hourlyView", router() })
+hourlyViewButton.addEventListener("click", function() { 
+     navigator.geolocation.getCurrentPosition(latLongHourly)
+ })
 
-weeklyViewButton.addEventListener("click", function() { navigator.geolocation.getCurrentPosition(latLongDaily), window.location.hash.substr(1) === "dailyView", router() })
+weeklyViewButton.addEventListener("click", function() { 
+    navigator.geolocation.getCurrentPosition(latLongDaily)
+})
 
 if (window.location.hash.substr(1) === "") {
     navigator.geolocation.getCurrentPosition(latLongCurrent)
