@@ -17,19 +17,6 @@ html {
     background-size: cover;
 }
 
-#main-container {
-    width: 100%;
-    height: 100%;
-    font-size: 20px;
-    color: white;
-    position: fixed;
-    top: 0;
-    left: 0;
-    margin: auto;
-    margin-bottom: -60px;
-    overflow-y: scroll;
-}
-
 #location {
     position: relative;
     top: 5%;
@@ -41,8 +28,8 @@ html {
 }
 
 .search-bar {
-    position: relative;
-    top: 8%;
+    position: absolute;
+    top: 100px;
     left: 42%;
     display: inline-block;
     outline: none;
@@ -67,6 +54,19 @@ html {
 .search-bar:hover {
     border: 2px solid #dcdcdc;
     color: #666666;
+}
+
+#main-container {
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: auto;
+    margin-bottom: -60px;
+    overflow-y: scroll;
 }
 
 .temp-container {
