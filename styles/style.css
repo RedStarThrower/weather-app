@@ -41,7 +41,7 @@ html {
 }
 
 .search-bar {
-	position: relative;
+    position: relative;
     top: 13%;
     left: 42%;
     display: inline-block;
@@ -99,14 +99,20 @@ html {
     width: 200px;
     background: rgba(255, 255, 255, .3);
     border-radius: 50%;
+    top: 30%;
+    left: 10%;
+    transform: translate(-50%, -50%);
 }
 
 .daily-weather {
-    height: 288px;
-    width: 288px;
+    height: 280px;
+    width: 280px;
     background: rgba(255, 255, 255, .3);
     border-radius: 50%;
     word-wrap: break-word;
+    top: 30%;
+    left: 10%;
+    transform: translate(-50%, -50%);
 }
 
 .current-date {
