@@ -14,6 +14,7 @@ var hourlyViewButton = document.querySelector("#hourly-button")
 var weeklyViewButton = document.querySelector("#weekly-button")
 
 // General Functions
+
 var tempConvert = function(fTemp) {
     var cValue = ((fTemp - 32) * 5 / 9)
     return cValue
@@ -36,12 +37,14 @@ var currentTimeConvert = function(timeValue) {
     var nowDate = new Date(timeValue * 1000)
     var hours = nowDate.getHours()
     var minutes = nowDate.getMinutes()
-    	if (minutes.length === 1) {
-        	minutes = "0" + minutes
-        	timeString = hours + ":" + minutes
-        	return timeString
-    	}
-    timeString = hours + ":" + minutes
+    if (minutes.length === 1) {
+        minutes = "0" + minutes
+        timeString = hours + ":" + minutes
+        return timeString
+    } 
+    else {
+        timeString = hours + ":" + minutes
+    }
     return timeString
 }
 
@@ -109,26 +112,26 @@ var dailyToHTML = function(jsonObj) {
 
 var doRequest = function(lat, lng) {
     var fullUrl = baseUrl + apiKey + "/" + lat + "," + lng + callbackHack
-    //console.log(fullUrl)
+        //console.log(fullUrl)
     return $.getJSON(fullUrl)
 }
 
 var latLongCurrent = function(positionObject) {
     var lat = positionObject.coords.latitude
     var lng = positionObject.coords.longitude
-    window.location.hash = "currentView/" + lat + "/" + lng
+    window.location.hash = "current/" + lat + "/" + lng
 }
 
 var latLongHourly = function(positionObject) {
     var lat = positionObject.coords.latitude
     var lng = positionObject.coords.longitude
-    window.location.hash = "hourlyView/" + lat + "/" + lng
+    window.location.hash = "hourly/" + lat + "/" + lng
 }
 
 var latLongDaily = function(positionObject) {
     var lat = positionObject.coords.latitude
     var lng = positionObject.coords.longitude
-    window.location.hash = "dailyView/" + lat + "/" + lng
+    window.location.hash = "daily/" + lat + "/" + lng
 }
 
 var router = function() {
@@ -138,13 +141,13 @@ var router = function() {
     var viewType = routeParts[0]
     var lat = routeParts[1]
     var lng = routeParts[2]
-    //console.log(routeParts)
-    if (viewType === "currentView") {
+        //console.log(routeParts)
+    if (viewType === "current") {
         doRequest(lat, lng).then(renderCurrentView)
-    } else if (viewType === "hourlyView") {
+    } else if (viewType === "hourly") {
         console.log('rending hourly view')
         doRequest(lat, lng).then(renderHourlyView)
-    } else if (viewType === "dailyView") {
+    } else if (viewType === "daily") {
         console.log('rending weekly view')
         doRequest(lat, lng).then(renderDailyView)
     }
@@ -158,11 +161,11 @@ currentViewButton.addEventListener("click", function() {
     navigator.geolocation.getCurrentPosition(latLongCurrent)
 })
 
-hourlyViewButton.addEventListener("click", function() { 
-     navigator.geolocation.getCurrentPosition(latLongHourly)
- })
+hourlyViewButton.addEventListener("click", function() {
+    navigator.geolocation.getCurrentPosition(latLongHourly)
+})
 
-weeklyViewButton.addEventListener("click", function() { 
+weeklyViewButton.addEventListener("click", function() {
     navigator.geolocation.getCurrentPosition(latLongDaily)
 })
 
