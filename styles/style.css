@@ -99,7 +99,7 @@ html {
     width: 200px;
     background: rgba(255, 255, 255, .3);
     border-radius: 50%;
-    margin-left: 80px;
+    margin-left: 100px;
 }
 
 .daily-weather {
@@ -108,7 +108,7 @@ html {
     background: rgba(255, 255, 255, .3);
     border-radius: 50%;
     word-wrap: break-word;
-    margin-left: 80px;
+    margin-left: 100px;
 }
 
 .current-date {
