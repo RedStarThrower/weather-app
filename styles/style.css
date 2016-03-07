@@ -42,7 +42,7 @@ html {
 
 .search-bar {
     position: relative;
-    top: 13%;
+    top: 8%;
     left: 42%;
     display: inline-block;
     outline: none;
@@ -99,9 +99,6 @@ html {
     width: 200px;
     background: rgba(255, 255, 255, .3);
     border-radius: 50%;
-    top: 30%;
-    left: 10%;
-    transform: translate(-50%, -50%);
 }
 
 .daily-weather {
@@ -110,9 +107,6 @@ html {
     background: rgba(255, 255, 255, .3);
     border-radius: 50%;
     word-wrap: break-word;
-    top: 30%;
-    left: 10%;
-    transform: translate(-50%, -50%);
 }
 
 .current-date {
