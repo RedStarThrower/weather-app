@@ -108,7 +108,7 @@ html {
     background: rgba(255, 255, 255, .3);
     border-radius: 50%;
     word-wrap: break-word;
-    margin-left: 80px;
+    margin-left: 50px;
 }
 
 .current-date {
@@ -175,7 +175,7 @@ html {
 
 .footer {
     background-color: white;
-    opacity: 0.3;
+    opacity: 0.4;
     position: absolute;
     left: 0;
     bottom: 0px;
