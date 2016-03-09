@@ -29,6 +29,9 @@ var currentTimeConvert = function(timeValue) {
     if (minutes < 10) {
         return timeString = hours + ":" + "0" + minutes
     } 
+    else if (hours < 10) {
+        return timeString = "0" + hours + ":" + minutes
+    }
     else {
         return timeString = hours + ":" + minutes
     }
@@ -38,12 +41,15 @@ var hourlyTimeConvert = function(timeValue) {
     var timeString = ""
     var nowDate = new Date(timeValue * 1000)
     var hours = nowDate.getHours()
+     if (hours < 10) {
+        return timeString = "0" + hours + ":00"
+    }
     return timeString = hours + ":00"
 }
 
 //Parsing and Rendering Data
 var doSkyconStuff = function(iconString) {
-    console.log(iconString)
+    //console.log(iconString)
     var formattedIcon = iconString.toUpperCase().replace(/-/g, "_")
     console.log(formattedIcon)
     var skycons = new Skycons({ "color": "white" });
