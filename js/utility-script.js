@@ -1,4 +1,4 @@
-console.log("hello utility-script")
+//console.log("hello utility-script")
 
 //Data Functions
 
