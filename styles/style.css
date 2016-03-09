@@ -24,7 +24,6 @@ html {
     left: 2.5%;
 }
 
-
 #location-text {
     color: white;
     font-size: 35px;
@@ -60,15 +59,7 @@ html {
 
 #main-container {
     width: 100%;
-    height: 100%;
-    font-size: 20px;
     color: white;
-    position: fixed;
-    top: 0;
-    left: 0;
-    margin: auto;
-    margin-bottom: -60px;
-    overflow-y: scroll;
 }
 
 .temp-container {
@@ -82,7 +73,6 @@ html {
     right: 0;
     left: 0;
     bottom: 0;
-    top: 150px;
 }
 
 .current-weather {
@@ -101,7 +91,7 @@ html {
     width: 200px;
     background: rgba(255, 255, 255, .3);
     border-radius: 50%;
-    margin-left: 80px;
+    margin-left: 30px;
 }
 
 .daily-weather {
@@ -126,8 +116,6 @@ html {
 }
 
 #icon1 {
-    margin-bottom: 0;
-    margin-top: 10px;
     margin-bottom: 15px;
 }
 
@@ -218,6 +206,7 @@ html {
     width: 200px;
     left: 6%;
     bottom: 6%;
+    font-size: 20px;
 }
 
 .daily-summary {

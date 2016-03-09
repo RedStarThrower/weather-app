@@ -1,4 +1,4 @@
-console.log("hello vanilla-script")
+console.log("hello utility-script")
 
 //Data Functions
 
@@ -28,48 +28,44 @@ var currentTimeConvert = function(timeValue) {
     var minutes = nowDate.getMinutes()
     if (minutes < 10) {
         return timeString = hours + ":" + "0" + minutes
-    } 
-    else if (hours < 10) {
+    } else if (hours < 10) {
         return timeString = "0" + hours + ":" + minutes
-    }
-    else {
+    } else {
         return timeString = hours + ":" + minutes
     }
-   }
+}
 
 var hourlyTimeConvert = function(timeValue) {
     var timeString = ""
     var nowDate = new Date(timeValue * 1000)
     var hours = nowDate.getHours()
-     if (hours < 10) {
+    if (hours < 10) {
         return timeString = "0" + hours + ":00"
     }
     return timeString = hours + ":00"
 }
 
 //Parsing and Rendering Data
-var doSkyconStuff = function(iconString,i) {
+
+var doSkyconStuff = function(iconString, i) {
     //console.log(iconString)
     var formattedIcon = iconString.toUpperCase().replace(/-/g, "_")
-    console.log(formattedIcon)
+        //console.log(formattedIcon)
     var skycons = new Skycons({ "color": "white" });
-    // on Android, a nasty hack is needed: {"resizeClear": true}
-    // you can add a canvas by its ID...
     skycons.add("icon" + i, Skycons[formattedIcon]);
-    // start animation!
     skycons.play();
 }
 
-var renderCurrentView = function(jsonData) { //renderCurrentWeather
+var renderCurrentView = function(jsonData) {
     var htmlString = ""
     var currentObj = jsonData.currently
-    var iconString = currentObj.icon    
+    var iconString = currentObj.icon
     htmlString += currentToHTML(currentObj)
     container.innerHTML = htmlString
-    doSkyconStuff(iconString,1)
+    doSkyconStuff(iconString, 1)
 }
 
-var renderHourlyView = function(jsonData) { //renderHourlyWeather
+var renderHourlyView = function(jsonData) {
     var htmlString = ""
     var hourlyDataArray = jsonData.hourly.data
     for (var i = 0; i < 24; i++) {
@@ -79,19 +75,19 @@ var renderHourlyView = function(jsonData) { //renderHourlyWeather
     container.innerHTML = htmlString
 }
 
-var renderDailyView = function(jsonData) { //renderDailyWeather
+var renderDailyView = function(jsonData) {
     var htmlString = ""
     var dailyDataArray = jsonData.daily.data
     for (var i = 0; i < dailyDataArray.length; i++) {
         var dailyObj = dailyDataArray[i]
         var iconString = dailyObj.icon
-        htmlString += dailyToHTML(dailyObj,i)
+        htmlString += dailyToHTML(dailyObj, i)
     }
     container.innerHTML = htmlString
-    for (var i = 0; i < dailyDataArray.length; i ++) {
+    for (var i = 0; i < dailyDataArray.length; i++) {
         var dailyObj = dailyDataArray[i]
         var iconString = dailyObj.icon
-        doSkyconStuff(iconString,i)
+        doSkyconStuff(iconString, i)
     }
 }
 
@@ -102,7 +98,7 @@ var currentToHTML = function(jsonObj) {
     tempString += '<div class="temp-container current-weather">' + '<p class="current-date">' + dateConvert(jsonObj.time) + '</p>'
     tempString += '<p class="current-time">' + currentTimeConvert(jsonObj.time) + '</p>'
     tempString += '<div class="icons">' + '<canvas id="icon1" width="100" height="100"></canvas>' + '</div>'
-    tempString += '<div class="current-temp-data">'+'<p class="current-temperature">' + jsonObj.temperature.toPrecision(2) + '&deg' + '</p>' + '</div>'
+    tempString += '<div class="current-temp-data">' + '<p class="current-temperature">' + jsonObj.temperature.toPrecision(2) + '&deg' + '</p>' + '</div>'
     tempString += '<div class="current-summary-data">' + '<p class="current-summary">' + jsonObj.summary + '</p>' + '</div>' + '</div>'
     return tempString
 }
@@ -116,12 +112,12 @@ var hourlyToHTML = function(jsonObj) {
     return tempString
 }
 
-var dailyToHTML = function(jsonObj,i) {
+var dailyToHTML = function(jsonObj, i) {
     var tempString = ""
     tempString += '<div class="temp-container daily-weather">' + '<p class="daily-date">' + dateConvert(jsonObj.time) + '</p>'
-    tempString += '<div class="icons">'+ '<canvas id="icon' + i + '"width="60" height="60"></canvas>' + '</div>'
-    tempString += '<div class="daily-temp-data">'+'<p class="daily-temperature">' + jsonObj.temperatureMin.toPrecision(2) + '&deg' + "/" + jsonObj.temperatureMax.toPrecision(2) + '&deg' + '</p>' + '</div>'
-    tempString += '<div class="daily-summary-data">' + '<p class="daily-summary-data">' + jsonObj.summary + '</p>' + '</div>'+'</div>'
+    tempString += '<div class="icons">' + '<canvas id="icon' + i + '"width="60" height="60"></canvas>' + '</div>'
+    tempString += '<div class="daily-temp-data">' + '<p class="daily-temperature">' + jsonObj.temperatureMin.toPrecision(2) + '&deg' + "/" + jsonObj.temperatureMax.toPrecision(2) + '&deg' + '</p>' + '</div>'
+    tempString += '<div class="daily-summary-data">' + '<p class="daily-summary-data">' + jsonObj.summary + '</p>' + '</div>' + '</div>'
     return tempString
 }
 
@@ -160,7 +156,6 @@ var changeView = function(clickEvent) {
         routeParts = route.split('/'),
         lat = routeParts[1],
         lng = routeParts[2]
-
     var buttonEl = clickEvent.target,
         newView = buttonEl.value
     location.hash = newView + "/" + lat + "/" + lng
@@ -182,7 +177,6 @@ var handleDailyView = function(lat, lng) {
 }
 
 var handleDefault = function() {
-    // get current lat long, write into the route
     var successCallback = function(positionObject) {
         var lat = positionObject.coords.latitude
         var lng = positionObject.coords.longitude
@@ -203,7 +197,6 @@ var callbackHack = "?callback=?"
 var container = document.querySelector("#main-container")
 var buttonsContainer = document.querySelector("#buttons")
 var inputEL = document.querySelector(".search-bar")
-inputEL.addEventListener = ("focus", function() {inputEL.value = ""})
 
 window.addEventListener('hashchange', router)
 buttonsContainer.addEventListener('click', changeView)
