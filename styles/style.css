@@ -5,7 +5,7 @@
 body {
     font-size: 0;
     font-family: Geneva;
-    height: 100%;
+    height:;
 }
 
 html {
@@ -18,16 +18,15 @@ html {
 }
 
 .header {
-   position: relative; 
-   display: block;
-   height: 50px;
-   left: 2.5%;
+    position: relative;
+    text-align: center;
+    display: block;
+    left: 2.5%;
 }
 
 #location {
-    font-size: 40px;
-    line-height: 40px;
-    text-align: center;
+    font-size: 35px;
+    line-height: 35px;
     width: 100%;
     color: white;
 }
@@ -151,8 +150,6 @@ html {
     bottom: 3%;
     text-shadow: #666666;
 }
-
-
 
 .current-summary {
     font-size: 35px;

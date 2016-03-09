@@ -28,7 +28,8 @@ var currentTimeConvert = function(timeValue) {
     var minutes = nowDate.getMinutes()
     if (minutes.length === 1) {
         return timeString = hours + ":" + "0" + minutes
-    } else {
+    } 
+    else {
         return timeString = hours + ":" + minutes
     }
    }
