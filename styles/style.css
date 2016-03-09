@@ -207,13 +207,9 @@ html {
     width: 200px;
     left: 6%;
     bottom: 6%;
-    font-size: 18px;
+    font-size: 15px;
+    line-height: 15px;
     padding: 5px;
-}
-
-.daily-summary {
-    font-size: 18px;
-    line-height: 20px;
 }
 
 .footer {
