@@ -26,8 +26,8 @@ var currentTimeConvert = function(timeValue) {
     var nowDate = new Date(timeValue * 1000)
     var hours = nowDate.getHours()
     var minutes = nowDate.getMinutes()
-    if (minutes.length === 1) {
-        return timeString = hours + ":" + "0" + minutes
+    if (minutes < 10 || hours < 10) {
+        return timeString = "0" + hours + ":" + "0" + minutes
     } 
     else {
         return timeString = hours + ":" + minutes
@@ -195,6 +195,8 @@ var baseUrl = "https://api.forecast.io/forecast"
 var callbackHack = "?callback=?"
 var container = document.querySelector("#main-container")
 var buttonsContainer = document.querySelector("#buttons")
+var inputEL = document.querySelector(".search-bar")
+inputEL.addEventListener = ("focus", function() {inputEL.value = ""})
 
 window.addEventListener('hashchange', router)
 buttonsContainer.addEventListener('click', changeView)
