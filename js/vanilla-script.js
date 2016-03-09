@@ -64,8 +64,10 @@ var doSkyconStuff = function(iconString) {
 var renderCurrentView = function(jsonData) { //renderCurrentWeather
     var htmlString = ""
     var currentObj = jsonData.currently
+    var iconString = currentObj.icon    
     htmlString += currentToHTML(currentObj)
     container.innerHTML = htmlString
+    doSkyconStuff(iconString)
 }
 
 var renderHourlyView = function(jsonData) { //renderHourlyWeather
@@ -83,9 +85,11 @@ var renderDailyView = function(jsonData) { //renderDailyWeather
     var dailyDataArray = jsonData.daily.data
     for (var i = 0; i < dailyDataArray.length; i++) {
         var dailyObj = dailyDataArray[i]
+        var iconString = dailyObj.icon
         htmlString += dailyToHTML(dailyObj)
     }
     container.innerHTML = htmlString
+    doSkyconStuff(iconString)
 }
 
 // Convert Data to HTML
@@ -97,8 +101,6 @@ var currentToHTML = function(jsonObj) {
     tempString += '<div>' + '<canvas id="icon1" width="100" height="100"></canvas>' + '</div>'
     tempString += '<div class="current-temp-data">'+'<p class="current-temperature">' + jsonObj.temperature.toPrecision(2) + '&deg' + '</p>' + '</div>'
     tempString += '<div class="current-summary-data">' + '<p class="current-summary">' + jsonObj.summary + '</p>' + '</div>' + '</div>'
-    var iconString = jsonObj.icon
-    doSkyconStuff(iconString)
     return tempString
 }
 
@@ -117,8 +119,6 @@ var dailyToHTML = function(jsonObj) {
     tempString += '<canvas id="icon2" width="60" height="60"></canvas>'
     tempString += '<div class="daily-temp-data">'+'<p class="daily-temperature">' + jsonObj.temperatureMin.toPrecision(2) + '&deg' + "/" + jsonObj.temperatureMax.toPrecision(2) + '&deg' + '</p>' + '</div>'
     tempString += '<div class="daily-summary-data">' + '<p class="daily-summary-data">' + jsonObj.summary + '</p>' + '</div>'+'</div>'
-    var iconString = jsonObj.icon
-    doSkyconStuff(iconString)
     return tempString
 }
 
