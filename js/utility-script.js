@@ -1,4 +1,4 @@
-console.log("hello vanilla-script")
+console.log("hello utility-script")
 
 //Data Functions
 
@@ -56,41 +56,6 @@ var doSkyconStuff = function(iconString, i) {
     skycons.play();
 }
 
-var renderCurrentView = function(jsonData) {
-    var htmlString = ""
-    var currentObj = jsonData.currently
-    var iconString = currentObj.icon
-    htmlString += currentToHTML(currentObj)
-    container.innerHTML = htmlString
-    doSkyconStuff(iconString, 1)
-}
-
-var renderHourlyView = function(jsonData) {
-    var htmlString = ""
-    var hourlyDataArray = jsonData.hourly.data
-    for (var i = 0; i < 24; i++) {
-        var hourlyObj = hourlyDataArray[i]
-        htmlString += hourlyToHTML(hourlyObj)
-    }
-    container.innerHTML = htmlString
-}
-
-var renderDailyView = function(jsonData) {
-    var htmlString = ""
-    var dailyDataArray = jsonData.daily.data
-    for (var i = 0; i < dailyDataArray.length; i++) {
-        var dailyObj = dailyDataArray[i]
-        var iconString = dailyObj.icon
-        htmlString += dailyToHTML(dailyObj, i)
-    }
-    container.innerHTML = htmlString
-    for (var i = 0; i < dailyDataArray.length; i++) {
-        var dailyObj = dailyDataArray[i]
-        var iconString = dailyObj.icon
-        doSkyconStuff(iconString, i)
-    }
-}
-
 // Convert Data to HTML
 
 var currentToHTML = function(jsonObj) {
@@ -121,35 +86,6 @@ var dailyToHTML = function(jsonObj, i) {
     return tempString
 }
 
-// Active Functions
-
-var makeWeatherPromise = function(lat, lng) {
-    var url = baseUrl + "/" + apiKey + "/" + lat + "," + lng + "?callback=?"
-    var promise = $.getJSON(url)
-    return promise
-}
-
-var router = function() {
-    var route = window.location.hash.substr(1),
-        routeParts = route.split('/'),
-        viewType = routeParts[0],
-        lat = routeParts[1],
-        lng = routeParts[2]
-
-    if (route === "") { //default route
-        handleDefault()
-    }
-
-    if (viewType === "current") {
-        handleCurrentView(lat, lng)
-    }
-    if (viewType === "daily") {
-        handleDailyView(lat, lng)
-    }
-    if (viewType === "hourly") {
-        handleHourlyView(lat, lng)
-    }
-}
 
 var changeView = function(clickEvent) {
     var route = window.location.hash.substr(1),
@@ -161,43 +97,15 @@ var changeView = function(clickEvent) {
     location.hash = newView + "/" + lat + "/" + lng
 }
 
-var handleCurrentView = function(lat, lng) {
-    var promise = makeWeatherPromise(lat, lng)
-    promise.then(renderCurrentView)
-}
-
-var handleHourlyView = function(lat, lng) {
-    var promise = makeWeatherPromise(lat, lng)
-    promise.then(renderHourlyView)
-}
-
-var handleDailyView = function(lat, lng) {
-    var promise = makeWeatherPromise(lat, lng)
-    promise.then(renderDailyView)
-}
-
-var handleDefault = function() {
-    var successCallback = function(positionObject) {
-        var lat = positionObject.coords.latitude
-        var lng = positionObject.coords.longitude
-        location.hash = "current/" + lat + "/" + lng
-    }
-    var errorCallback = function(error) {
-        console.log(error)
-    }
-    window.navigator.geolocation.getCurrentPosition(successCallback, errorCallback)
-}
-
+//Variables
 
 // https://api.forecast.io/forecast/APIKEY/LATITUDE,LONGITUDE
 
 var apiKey = "fb3549f9294dafeb23736a837799d69c"
 var baseUrl = "https://api.forecast.io/forecast"
 var callbackHack = "?callback=?"
-var container = document.querySelector("#main-container")
+var container = document.querySelector("#container")
 var buttonsContainer = document.querySelector("#buttons")
 var inputEL = document.querySelector(".search-bar")
 
-window.addEventListener('hashchange', router)
-buttonsContainer.addEventListener('click', changeView)
-router()
+
