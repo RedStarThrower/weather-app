@@ -21,13 +21,15 @@ html {
     position: relative;
     text-align: center;
     display: block;
-    left: 4%;
+    left: 2.5%;
 }
 
-#location {
+
+#location-text {
+    color: white;
     font-size: 35px;
     line-height: 35px;
-    color: white;
+    margin-bottom: 20px;
 }
 
 .search-bar {
