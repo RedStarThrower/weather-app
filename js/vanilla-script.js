@@ -48,15 +48,14 @@ var hourlyTimeConvert = function(timeValue) {
 }
 
 //Parsing and Rendering Data
-var doSkyconStuff = function(iconString) {
+var doSkyconStuff = function(iconString,i) {
     //console.log(iconString)
     var formattedIcon = iconString.toUpperCase().replace(/-/g, "_")
     console.log(formattedIcon)
     var skycons = new Skycons({ "color": "white" });
     // on Android, a nasty hack is needed: {"resizeClear": true}
     // you can add a canvas by its ID...
-    skycons.add("icon1", Skycons[formattedIcon]);
-    skycons.add("icon2", Skycons[formattedIcon]);
+    skycons.add("icon" + i, Skycons[formattedIcon]);
     // start animation!
     skycons.play();
 }
@@ -67,7 +66,7 @@ var renderCurrentView = function(jsonData) { //renderCurrentWeather
     var iconString = currentObj.icon    
     htmlString += currentToHTML(currentObj)
     container.innerHTML = htmlString
-    doSkyconStuff(iconString)
+    doSkyconStuff(iconString,1)
 }
 
 var renderHourlyView = function(jsonData) { //renderHourlyWeather
@@ -86,10 +85,14 @@ var renderDailyView = function(jsonData) { //renderDailyWeather
     for (var i = 0; i < dailyDataArray.length; i++) {
         var dailyObj = dailyDataArray[i]
         var iconString = dailyObj.icon
-        htmlString += dailyToHTML(dailyObj)
+        htmlString += dailyToHTML(dailyObj,i)
     }
     container.innerHTML = htmlString
-    doSkyconStuff(iconString)
+    for (var i = 0; i < dailyDataArray.length; i ++) {
+        var dailyObj = dailyDataArray[i]
+        var iconString = dailyObj.icon
+        doSkyconStuff(iconString,i)
+    }
 }
 
 // Convert Data to HTML
@@ -98,7 +101,7 @@ var currentToHTML = function(jsonObj) {
     var tempString = ""
     tempString += '<div class="temp-container current-weather">' + '<p class="current-date">' + dateConvert(jsonObj.time) + '</p>'
     tempString += '<p class="current-time">' + currentTimeConvert(jsonObj.time) + '</p>'
-    tempString += '<div>' + '<canvas id="icon1" width="100" height="100"></canvas>' + '</div>'
+    tempString += '<div class="icons">' + '<canvas id="icon1" width="100" height="100"></canvas>' + '</div>'
     tempString += '<div class="current-temp-data">'+'<p class="current-temperature">' + jsonObj.temperature.toPrecision(2) + '&deg' + '</p>' + '</div>'
     tempString += '<div class="current-summary-data">' + '<p class="current-summary">' + jsonObj.summary + '</p>' + '</div>' + '</div>'
     return tempString
@@ -113,10 +116,10 @@ var hourlyToHTML = function(jsonObj) {
     return tempString
 }
 
-var dailyToHTML = function(jsonObj) {
+var dailyToHTML = function(jsonObj,i) {
     var tempString = ""
     tempString += '<div class="temp-container daily-weather">' + '<p class="daily-date">' + dateConvert(jsonObj.time) + '</p>'
-    tempString += '<canvas id="icon2" width="60" height="60"></canvas>'
+    tempString += '<div class="icons">'+ '<canvas id="icon' + i + '"width="60" height="60"></canvas>' + '</div>'
     tempString += '<div class="daily-temp-data">'+'<p class="daily-temperature">' + jsonObj.temperatureMin.toPrecision(2) + '&deg' + "/" + jsonObj.temperatureMax.toPrecision(2) + '&deg' + '</p>' + '</div>'
     tempString += '<div class="daily-summary-data">' + '<p class="daily-summary-data">' + jsonObj.summary + '</p>' + '</div>'+'</div>'
     return tempString
