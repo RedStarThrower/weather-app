@@ -26,8 +26,8 @@ var currentTimeConvert = function(timeValue) {
     var nowDate = new Date(timeValue * 1000)
     var hours = nowDate.getHours()
     var minutes = nowDate.getMinutes()
-    if (minutes < 10 || hours < 10) {
-        return timeString = "0" + hours + ":" + "0" + minutes
+    if (minutes < 10) {
+        return timeString = hours + ":" + "0" + minutes
     } 
     else {
         return timeString = hours + ":" + minutes
@@ -88,11 +88,10 @@ var currentToHTML = function(jsonObj) {
     var tempString = ""
     tempString += '<div class="temp-container current-weather">' + '<p class="current-date">' + dateConvert(jsonObj.time) + '</p>'
     tempString += '<p class="current-time">' + currentTimeConvert(jsonObj.time) + '</p>'
-    tempString += '<canvas id="icon1" width="100" height="100"></canvas>'
+    tempString += '<div>' + '<canvas id="icon1" width="100" height="100"></canvas>' + '</div>'
     tempString += '<div class="current-temp-data">'+'<p class="current-temperature">' + jsonObj.temperature.toPrecision(2) + '&deg' + '</p>' + '</div>'
     tempString += '<div class="current-summary-data">' + '<p class="current-summary">' + jsonObj.summary + '</p>' + '</div>' + '</div>'
     var iconString = jsonObj.icon
-    //console.log(iconString)
     doSkyconStuff(iconString)
     return tempString
 }
@@ -113,7 +112,6 @@ var dailyToHTML = function(jsonObj) {
     tempString += '<div class="daily-temp-data">'+'<p class="daily-temperature">' + jsonObj.temperatureMin.toPrecision(2) + '&deg' + "/" + jsonObj.temperatureMax.toPrecision(2) + '&deg' + '</p>' + '</div>'
     tempString += '<div class="daily-summary-data">' + '<p class="daily-summary-data">' + jsonObj.summary + '</p>' + '</div>'+'</div>'
     var iconString = jsonObj.icon
-    //console.log(iconString)
     doSkyconStuff(iconString)
     return tempString
 }
