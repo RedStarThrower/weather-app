@@ -257,9 +257,11 @@ html {
 .myButton:hover {
     background-color: white;
     color: #666666;
+     outline: none;
 }
 
 .myButton:active {
     position: relative;
     top: 1px;
+    outline: none;
 }
