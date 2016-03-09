@@ -21,13 +21,12 @@ html {
     position: relative;
     text-align: center;
     display: block;
-    left: 2.5%;
+    left: 4%;
 }
 
 #location {
     font-size: 35px;
     line-height: 35px;
-    width: 100%;
     color: white;
 }
 
@@ -166,6 +165,13 @@ html {
 .hourly-time {
     font-size: 20px;
     margin: 0;
+}
+
+.hourly-temp-data {
+    display: block;
+    position: relative;
+    width: 200px;
+    left: 7%;
 }
 
 .hourly-temperature {

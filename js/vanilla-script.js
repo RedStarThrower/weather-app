@@ -65,7 +65,7 @@ var renderCurrentView = function(jsonData) { //renderCurrentWeather
 var renderHourlyView = function(jsonData) { //renderHourlyWeather
     var htmlString = ""
     var hourlyDataArray = jsonData.hourly.data
-    for (var i = 0; i < 25; i++) {
+    for (var i = 0; i < 24; i++) {
         var hourlyObj = hourlyDataArray[i]
         htmlString += hourlyToHTML(hourlyObj)
     }
@@ -101,7 +101,7 @@ var hourlyToHTML = function(jsonObj) {
     var tempString = ""
     tempString += '<div class="temp-container hourly-weather">' + '<p class="hourly-date">' + dateConvert(jsonObj.time) + '</p>'
     tempString += '<p class="hourly-time">' + hourlyTimeConvert(jsonObj.time) + '</p>'
-    tempString += '<p class="hourly-temperature">' + jsonObj.temperature.toPrecision(2) + '&deg' + '</p>'
+    tempString += '<div class="hourly-temp-data">' + '<p class="hourly-temperature">' + jsonObj.temperature.toPrecision(2) + '&deg' + '</p>' + '</div>'
     tempString += '<p class="hourly-summary">' + jsonObj.summary + '</p>' + '</div>'
     return tempString
 }
