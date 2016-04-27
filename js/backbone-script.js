@@ -16,7 +16,6 @@ var initView = function(someModel) {
     this.model.on("sync", boundRender)
 }
 
-
 var WeatherModel = Backbone.Model.extend({
     _generateUrl: function(lat, lng) {
         this.url = "https://api.forecast.io/forecast/fb3549f9294dafeb23736a837799d69c/" + lat + "," + lng + "?callback=?"

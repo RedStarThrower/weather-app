@@ -106,6 +106,3 @@ var baseUrl = "https://api.forecast.io/forecast"
 var callbackHack = "?callback=?"
 var container = document.querySelector("#container")
 var buttonsContainer = document.querySelector("#buttons")
-var inputEL = document.querySelector(".search-bar")
-
-
