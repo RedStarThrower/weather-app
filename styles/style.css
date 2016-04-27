@@ -24,6 +24,11 @@ html {
     left: 2.5%;
 }
 
+#location {
+    position: relative;
+    margin-top: 6%;
+}
+
 #location-text {
     color: white;
     font-size: 35px;
